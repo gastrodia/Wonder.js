@@ -1,0 +1,1 @@
+type initConfig = {isTest: bool};

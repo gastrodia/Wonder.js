@@ -1,0 +1,27 @@
+{
+  "name": "wonder.js",
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    },
+    {
+      "dir": "test",
+      "subdirs": true,
+      "type":"dev"
+    }
+  ],
+  "bs-dev-dependencies": [
+    "wonder-bs-jest",
+    "wonder-bs-sinon"
+  ],
+  "refmt": 3,
+  "bs-dependencies": [
+    "bs-json",
+    "wonder-commonlib"
+  ],
+  "package-specs": [
+    "es6-global"
+  ],
+  "namespace": true
+}

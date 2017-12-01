@@ -1,186 +1,39 @@
 * Wonder.js
-Wonder.js is a 3D Javascript Game Engine. It is currently in alpha, any contributions are very welcome.
+Wonder.js is a Functional, High performance 3D WebGL Engine.
+It is currently in alpha, any contributions are very welcome.
 
-[[https://travis-ci.org/yyc-git/Wonder.js?branch%3Dmaster][https://travis-ci.org/yyc-git/Wonder.js.png]] [[https://codecov.io/github/yyc-git/Wonder.js?branch=master][https://codecov.io/github/yyc-git/Wonder.js/coverage.svg?branch=master]]
+[[https://travis-ci.org/DreamForeast/Wonder.js?branch%3Dmaster][https://travis-ci.org/DreamForeast/Wonder.js.png]] [[https://codecov.io/github/DreamForeast/Wonder.js?branch=master][https://codecov.io/github/DreamForeast/Wonder.js/coverage.svg?branch=master]]
 
 * Goal
-To build a elegant, beautiful 3D game engine with full functions.
+To build a elegant, high performance 3D engine with full functions.
 * Document
-- [[https://github.com/yyc-git/Wonder.js/wiki][wiki]]
-- [[https://github.com/yyc-git/Wonder.js/wiki/Roadmap][Roadmap]]
 
 Please learn samples in examples/samples/ to get more info.
 * Design
-- Component
-
-  use components to assemble game object.
+- Functional Programming
 - Functional Reactive Programming
 
   use Wonder-FRP library to handle async operation in frp way.
-- Code Contract
+- Data Oriented Design
+- Data Driven
+- ECS(Entity-Component-System)
 
+  use components to assemble game object.
+- Multi Thread Render
+- Defer Shading
+
+- Design By Contract
   use contract to improve code quality and help debug.
-- Event Driven
-
-  use event system to bind dom/custom event or to implement observer design pattern in frp way.
-- Composable Shader
-
-  use shader libs to assemble glsl code.
 * Contributing
 Join us, We can create the amazing 3D world together!
 * Feature
-- Event System
-  - EventTriggerDetector
-- UI
-  - Ttf Font, Bitmap Font
-  - ProgressBar
-  - Image
-  - Button
-- Picking
-  - RayCast Picking
-- Collider
-  - BoxCollider,SphereCollider,AABBShape,SphereShape
-- Physics
-  - RigidBody,Collision,Constraint,Compound
-- Animation
-  - Morph
-- Camera
-  - Perspective,Orthographic Camera
-  - Arcball Control
-  - Fly Control
-- Light
-  - Direction,Point Light
-  - Diffuse Map
-  - Specular Map
-  - Normal Map
-  - Mirror
-  - Reflection,Refraction,Fresnel
-- Script
-  - User Script
-  - Event Script
-- Shader
-  - Custom Shader
-- Shadow
-  - Direction,Point Light ShadowMap
-- Skybox
-- Texture
-  - Canvas Texture
-  - Video Texture
-  - Compressed Texture(DDS)
-  - Cubemap Texture
-- Converter
-  - OBJ Converter
-  - MD2 Converter
+
+
+* Tool
+
 * Usage
-Include library in your html:
-#+BEGIN_SRC html
-  <script src="dist/wd.min.js"></script>
-#+END_SRC
-Here shows a spinning cube sample:
-#+BEGIN_SRC js
-  <script>
-      window.onload = function () {
-          //set full screen and init engine
-          wd.Main.setConfig({
-              screenSize: wd.ScreenSize.FULL
-          }).init();
 
-          initSample();
-
-          function initSample() {
-              var director = wd.Director.getInstance();
-
-              director.scene.addChild(createBox());
-              director.scene.addChild(createCamera());
-
-              director.start();
-          }
-
-          function createBox() {
-              var material = wd.BasicMaterial.create();
-              material.color = wd.Color.create("rgb(1.0,0.0,1.0)");
-
-              var geometry = wd.BoxGeometry.create();
-              geometry.material = material;
-              geometry.width = 5;
-              geometry.height = 5;
-              geometry.depth = 5;
-
-              var gameObject = wd.GameObject.create();
-              gameObject.addComponent(geometry);
-              gameObject.addComponent(wd.MeshRenderer.create());
-
-              var action = wd.RepeatForever.create(wd.CallFunc.create(function () {
-                  gameObject.transform.rotate(0, 1, 0);
-              }));
-
-              gameObject.addComponent(action);
-
-              return gameObject;
-          }
-
-          function createCamera() {
-              var camera = wd.GameObject.create(),
-                  view = wd.Director.getInstance().view,
-                  cameraComponent = wd.PerspectiveCamera.create();
-
-              cameraComponent.fovy = 60;
-              cameraComponent.aspect = view.width / view.height;
-              cameraComponent.near = 0.1;
-              cameraComponent.far = 100;
-
-              var controller = wd.BasicCameraController.create(cameraComponent);
-              camera.addComponent(controller);
-
-              camera.transform.translate(wd.Vector3.create(0, 0, 30));
-
-              return camera;
-          }
-      };
-  </script>
-#+END_SRC
 * How to build
-- bower
-
-  You can install engine under bower:
-
-#+BEGIN_SRC js
-  bower install wonder
-#+END_SRC
-
-- setup engine
-
-  If you want to pull request(that's very appreciate), you can setup engine firstly under these commands:
-
-#+BEGIN_SRC js
-  //run these commands in project dir
-  npm install
-  git submodule init
-  git submodule update --remote
-  gulp build
-#+END_SRC
 * How to test
-- unit test
-
-  Wonder.js has complete unit test, you can clone this project and run karma under gulp task:
-
-#+BEGIN_SRC js
-  //you should first setup engine
-
-  //then run test gulp task in project dir
-  gulp test
-#+END_SRC
-- debug
-
-  You can first include wd.innerLib.js file, then include wd.debug.js file in your html, then you can debug in engine ts
-  file:
-
-#+BEGIN_SRC html
-  <script src="dist/wd.innerLib.js"></script>
-  <script src="dist/wd.debug.js"></script>
-#+END_SRC
 * License
 MIT Licence
-
-
-
